@@ -1,6 +1,12 @@
 package main
 
 import "fmt"
+
+
+import "crypto/sha1" 
+import "encoding/hex"
+
+
 func Perm(a []rune, f func([]rune)) {
     perm(a, f, 0)
 }
@@ -18,8 +24,16 @@ func perm(a []rune, f func([]rune), i int) {
         a[i], a[j] = a[j], a[i]
     }
 }
-
+func createHash(key string) string {
+	hasher := sha1.New()
+	hasher.Write([]byte(key))
+	return hex.EncodeToString(hasher.Sum(nil))
+}
 func main() {
     Perm([]rune("abcd"), func(a []rune) {
-        fmt.Println(string(a))
-    })}
+        fmt.Println(createHash(string(a)))
+    })
+    fmt.Println("Hello fatouma")
+    fmt.Println(createHash("hello fatouma"))
+    fmt.Println(createHash("hello fatouma"))
+}
