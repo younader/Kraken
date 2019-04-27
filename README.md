@@ -1,10 +1,9 @@
 # Kraken
-A distributed brute force password cracker using Golang and Redis and MPI
-default number of go routines 8
+A distributed brute force password cracker using Golang and Redis and MPI\n
+default number of go routines 8 \n
+to use the application: \n
 
-to use the application:
-
-  .clone the repository
-  .go install to your GOBIN directory
-  .type kraken help to learn more about the cli
+  .clone the repository\n
+  .go install to your GOBIN directory \n
+  .type kraken help to learn more about the cli \n
 
