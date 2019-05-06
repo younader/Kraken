@@ -153,19 +153,22 @@ func main() {
 		for i := 0; i < s.Len(); i++ {
 			dic = append(dic, s.Index(i).Elem().String())
 		}
-
+		loc, _ := time.LoadLocation("UTC")
 		Mode, _ := strconv.Atoi(data["mode"].(string))
 		Length, _ := strconv.Atoi(data["length"].(string))
-
+		timeBefore := time.Now().In(loc)
 		mymgr := mgr.Mgr{Mode: Mode, Length: Length, CharacterSet: data["charset"].(string), WorkGroup: &wg}
 		var pass string
 		mymgr.Attack(data["hash"].(string), dic, &pass)
 		wg.Wait()
-
+		timeAfter := time.Now().In(loc)
+		diff := timeBefore.Sub(timeAfter)
+		diffSeconds := int(diff.Seconds())
 		fmt.Println("the result is", pass)
 
 		_, err = client.Collection("results").Doc(data["hash"].(string)).Set(context.Background(), map[string]interface{}{
 			"password": pass,
+			"time":     diffSeconds,
 		})
 		if err != nil {
 			// Handle any errors in an appropriate way, such as returning them.

@@ -108,7 +108,7 @@
     // TODO: Replace the following with your app's Firebase project configuration
    
 let dictionary=[]
-
+let id=1
 function submit(){
     let e=document.getElementById("mode")
     let mode=e.options[e.selectedIndex].value
@@ -134,16 +134,18 @@ function submit(){
             let result=document.createElement("tr")
             let header=document.createElement("th")
             header.setAttribute("scope","row")
-            header.appendChild(document.createTextNode("1"))
+            header.appendChild(document.createTextNode(id))
+            id=id+1
             let temp=document.createElement("td")
             temp.appendChild(document.createTextNode(doc.id))
             result.appendChild(header)
             result.appendChild(temp)
             temp=document.createElement("td")
-            temp.appendChild(document.createTextNode(doc.data().password))
+            let pass=doc.data().password==""?"Not found":doc.data().password
+            temp.appendChild(document.createTextNode(pass))
             result.appendChild(temp)
             temp=document.createElement("td")
-            temp.appendChild(document.createTextNode("1"))
+            temp.appendChild(document.createTextNode(doc.data().time))
             result.appendChild(temp)
 
                 document.getElementById("results").appendChild(result)
