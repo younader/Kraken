@@ -1,5 +1,5 @@
 # Kraken
- A distributed brute force password cracker using Golang and Redis and MPI
+ A distributed brute force password cracker using Golang
  default number of go routines 8 
  to use the application: 
 
